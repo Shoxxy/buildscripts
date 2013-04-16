@@ -7,8 +7,6 @@
 
 CM_VERSION=10.1
 CMD="${1}"
-RBUILD=`echo $CM_VERSION  |tr '[:upper:]' '[:lower:]'`			#Makes Eveything lowercase
-LBUILD=`echo $RBUILD |sed 's/[0-9]*//g'`				#Strips any numbers from $BUILD
 CMROOT=									#folder name of your CM source ie: 'system'
 DIR=~/android/${CMROOT}							#Set Working Dir
 OUT=$DIR/out/target/product/${CMD}
@@ -90,7 +88,7 @@ esac
 	{
                 echo -e "${txtgrn}Generating md5sum...${txtrst}"
 		cd $OUT
-			for FILE in ${LBUILD}*${CMD}*.zip; do     
+			for FILE in ${CM_VERSION}*${CMD}*.zip; do     
 				md5sum $FILE > ${FILE}.md5sum
 			echo -e "${txtblu}Generated md5sum...done.${txtrst}"
 			done
@@ -99,8 +97,8 @@ esac
 # Upload maybe?
 	post_process()
 	{
-        	cp $OUT/${LBUILD}*${CMD}*.zip $UPLOAD/
-		cp $OUT/${LBUILD}*${CMD}*.zip.md5sum $UPLOAD/
+        	cp $OUT/${CM_VERSION}*${CMD}*.zip $UPLOAD/
+		cp $OUT/${CM_VERSION}*${CMD}*.zip.md5sum $UPLOAD/
 		echo "Files Copied to Web Folder"
 		cmupdater
 	}		
@@ -217,6 +215,7 @@ START=$(date +%s)
 		env_setup
 		extras
 		build_it
+		rm $OUT/*${CMD}-ota*.zip
 		md5_sum
 		echo -e "${txtgrn}Build Complete...!!${txtrst}"
 		cd $DIR
