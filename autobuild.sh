@@ -7,7 +7,7 @@
 
 CM_VERSION=10.1
 CMD="${1}"
-CMROOT=									#folder name of your CM source ie: 'system'
+CMROOT=system								#folder name of your CM source ie: 'system'
 DIR=~/android/${CMROOT}							#Set Working Dir
 OUT=$DIR/out/target/product/${CMD}
 NOW=`date +%s`
@@ -126,17 +126,19 @@ esac
 #check for working Dir
 	workingdir()
 	{
-		if [ -z "${CMROOT}" ]; then
-        		echo -e "${txtred}No Working Dir set."
-       			echo -e "${txtred}Edit Build.sh and set CROOT=system"
+		if [ ! -d "$DIR" ]; then
+        		echo -e "${txtred}Custom Working Dir set."
+       			echo -e "${txtred}Edit autobuild.sh and set CROOT=Path_to_your_Source"
         		echo -e "${txtred}or whatever your CM source dir is"
         		echo -e "\r\n ${txtrst}"
-        		echo -e "${txtgrn}Source Dir? (system):${txtrst}"
+        		echo -e "${txtgrn}Source Dir? (CM10):${txtrst}"
 			read CMROOT
 
 			if [ "$CMROOT" = "" ]; then
-			CMROOT=system
+				CMROOT=CM10
 			fi
+		else
+			echo -e "${txtgrn}Working_dir=${DIR} ${txtrst}"
 		fi
 	}
 
@@ -223,7 +225,7 @@ START=$(date +%s)
 	}
 
 #Start Up...
-if [ -z "${CMROOT}" ]; then
+if [ ! -d "${DIR}" ]; then
 workingdir
 DIR=~/android/${CMROOT}
 fi
