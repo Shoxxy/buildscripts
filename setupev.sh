@@ -212,7 +212,7 @@ prepare_environment()
         repo init -u git://github.com/CyanogenMod/android.git -b $branch
         mkdir -p $working_directory/.repo/local_manifests
         touch $working_directory/.repo/local_manifests/my_manifest.xml
-        curl https://raw.github.com/hrubak/buildscripts/$branch/my_manifest.xml > $working_directory/.repo/local_manifests/my_manifest.xml
+        curl https://raw.github.com/hrubak/buildscripts/$branch/my_manifest.xml > $working_directory/.repo/local_manifests/roomservice.xml
         repo sync -j12
         echo "Sources synced to $working_directory. Use Build.sh to start building CyanogenMod"        
         exit
