@@ -52,6 +52,11 @@ esac
 		if [ -f ${CMD}-tools/apply.sh ]; then
 			echo -e "${txtylw}Applying patches...${txtrst}"
 			${CMD}-tools/apply.sh
+			status=$?
+				if [ $status -ne 0]; then
+					echo "PATCH FAILED"
+					exit
+				fi
 		else
 			repo abandon auto
 		fi		
