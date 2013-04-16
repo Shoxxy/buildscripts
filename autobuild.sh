@@ -53,7 +53,7 @@ esac
 			echo -e "${txtylw}Applying patches...${txtrst}"
 			${CMD}-tools/apply.sh
 			status=$?
-				if [ $status -ne 0]; then
+				if [ "$status" -ne 0]; then
 					echo "PATCH FAILED"
 					exit
 				fi
