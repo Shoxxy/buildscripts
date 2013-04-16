@@ -109,16 +109,16 @@ esac
 	{
 		if [ -z "${CMD}" ]; then
         		echo -e "${txtred}No build target set."
-       			echo -e "${txtred}Usage: ./buildgs3.sh d2vzw (complete build)"
-        		echo -e "${txtred}       ./buildgs.sh d2vzw foo (Custom Release Version)"
+       			echo -e "${txtred}Usage: ./buildgs3.sh d2spr (complete build)"
+        		echo -e "${txtred}       ./buildgs.sh d2spr foo (Custom Release Version)"
         		echo -e "${txtred}       ./build.sh clean"
         		echo -e "${txtred}       ./build.sh clobber (Clobber)"
         		echo -e "\r\n ${txtrst}"
-        		echo -e "${txtgrn}Target device? (d2vzw):${txtrst}"
+        		echo -e "${txtgrn}Target device? (d2spr):${txtrst}"
 			read CMD
 
 			if [ "$CMD" = "" ]; then
-			CMD=d2vzw
+			CMD=d2spr
 			fi
 		fi
 	}
