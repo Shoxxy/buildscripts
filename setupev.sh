@@ -214,7 +214,7 @@ prepare_environment()
         touch $working_directory/.repo/local_manifests/my_manifest.xml
         curl https://raw.github.com/hrubak/buildscripts/$branch/my_manifest.xml > $working_directory/.repo/local_manifests/my_manifest.xml
         repo sync -j12
-        echo "Sources synced to $working_directory"        
+        echo "Sources synced to $working_directory. Use Build.sh to start building CyanogenMod"        
         exit
         ;;
     "N" | "n")
@@ -243,8 +243,3 @@ echo -e "\r\n ${txtrst}"
         check_root
         check_machine_type
         prepare_environment
-        echo -e "${txtgrn} Setup Complete. Use Build.sh to make a rom."
-		echo -e "\r\n ${txtrst}"
-        exit
-
-
