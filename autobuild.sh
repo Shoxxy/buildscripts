@@ -52,11 +52,12 @@ esac
 		if [ -f ${CMD}-tools/apply.sh ]; then
 			echo -e "${txtylw}Applying patches...${txtrst}"
 			${CMD}-tools/apply.sh
-			status=$?
-				if [ "$status" -ne 0]; then
-					echo "PATCH FAILED"
+			MESG=$?
+				if [ "$MESG" -ne "0" ]; then
+					echo "PATCH FAILED : ${MESG}"
 					exit
 				fi
+			echo -e "${txtgrn}EXIT PASS : ${MESG}${txtrst}"
 		else
 			repo abandon auto
 		fi		
