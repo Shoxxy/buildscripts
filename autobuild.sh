@@ -7,7 +7,7 @@
 
 CM_VERSION=10.1
 CMD="${1}"
-CMROOT=system								#folder name of your CM source ie: 'system'
+CMROOT=CM10								#folder name of your CM source ie: 'system'
 DIR=~/android/${CMROOT}							#Set Working Dir
 OUT=$DIR/out/target/product/${CMD}
 NOW=`date +%s`
@@ -94,21 +94,11 @@ esac
 	{
                 echo -e "${txtgrn}Generating md5sum...${txtrst}"
 		cd $OUT
-			for FILE in ${CM_VERSION}*${CMD}*.zip; do     
+			for FILE in *${CMD}*.zip; do     
 				md5sum $FILE > ${FILE}.md5sum
 			echo -e "${txtblu}Generated md5sum...done.${txtrst}"
 			done
 	}
-
-# Upload maybe?
-	post_process()
-	{
-        	cp $OUT/${CM_VERSION}*${CMD}*.zip $UPLOAD/
-		cp $OUT/${CM_VERSION}*${CMD}*.zip.md5sum $UPLOAD/
-		echo "Files Copied to Web Folder"
-		cmupdater
-	}		
-
 
 #check for build target
 	target()
