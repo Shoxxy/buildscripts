@@ -19,3 +19,10 @@ Build CyanogenMod
 ```
 cd ~/android/system
 . autobuild.sh
+```
+also you can set the device and add a releasename
+```
+. autobuild.sh d2vzw test
+```
+will build a a GalaxySIII Verizon rom named cm-10.1-{date}-EXPERIMENTAL-d2vzw-test.zip
+
