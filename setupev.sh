@@ -192,11 +192,11 @@ prepare_environment()
                 ;;
         esac
 
-        echo "Target Directory (~/android/system):"
+        echo "Target Directory (~/android/CM10):"
         read working_directory
 
         if [ ! -n $working_directory ]; then 
-            working_directory="~/android/system"
+            working_directory="~/android/CM10"
         fi
 
         echo "Installing to $working_directory"
@@ -214,7 +214,7 @@ prepare_environment()
         touch $working_directory/.repo/local_manifests/roomservice.xml
         curl https://raw.github.com/hrubak/buildscripts/$branch/my_manifest.xml > $working_directory/.repo/local_manifests/roomservice.xml
         repo sync -j12
-        echo "Sources synced to $working_directory. Use Build.sh to start building CyanogenMod"        
+        echo "Sources synced to $working_directory. Use $working_directory autobuild.sh to start building CyanogenMod"        
         exit
         ;;
     "N" | "n")
