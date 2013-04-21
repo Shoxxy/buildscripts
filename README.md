@@ -17,7 +17,7 @@ Then just follow the prompts :)
 Build CyanogenMod
 ==================
 ```
-cd ~/android/system
+cd ~/android/CM10
 . autobuild.sh
 ```
 also you can set the device and add a releasename
