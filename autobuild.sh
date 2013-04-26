@@ -188,7 +188,7 @@ START=$(date +%s)
 
 
 	echo -e "${txtred}Do you want to MAKE clean? (y/n/clobber)[y]${txtrst}"
-		read -n1 clean
+		read -t5 clean
 		echo -e "\r\n"
 	if [ -z $clean ]; then
 		clean=y
