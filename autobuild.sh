@@ -200,7 +200,7 @@ START=$(date +%s)
 			make clean
 	        	rm -rf ./out/target/product
 			;;
-		clobber)
+		"clobber")
 			echo -e "${txtylw}Clobber all the THINGS!!!${txtrst}"
 			make clobber
 			;;
