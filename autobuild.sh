@@ -5,7 +5,7 @@
 
 # Lets set some variables
 
-CM_VERSION=10.1
+CM_VERSION=10.2
 CMD="${1}"
 CMROOT=CM10								#folder name of your CM source ie: 'system'
 DIR=~/android/${CMROOT}							#Set Working Dir

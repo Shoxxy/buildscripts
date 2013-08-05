@@ -3,6 +3,6 @@
   <project name="Hrubak/buildscripts" path="buildscripts" remote="github">
     <copyfile dest="autobuild.sh" src="autobuild.sh" />
   </project>
-  <project name="Hrubak/d2spr-tools.git" path="d2spr-tools" remote="github" revision="cm10.1" />
-  <project name="TheMuppets/proprietary_vendor_samsung" path="vendor/samsung" remote="github" revision="cm-10.1" />
+  <project name="Hrubak/d2spr-tools.git" path="d2spr-tools" remote="github" revision="cm10.2" />
+  <project name="TheMuppets/proprietary_vendor_samsung" path="vendor/samsung" remote="github" revision="cm-10.2" />
 </manifest>
