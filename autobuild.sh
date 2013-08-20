@@ -41,7 +41,7 @@ esac
 	repo_sync()
 	{
 		echo -e "${txtylw}Syncing Source...${txtrst}"
-		repo sync -j24
+		reposync
 		echo "Files Synced"
 	}
 	
@@ -209,8 +209,8 @@ START=$(date +%s)
 			# Continue
 			;;
 	esac
-		repo_sync
 		env_setup
+		repo_sync
 		extras
 		build_it
 		rm $OUT/*${CMD}-ota*.zip
