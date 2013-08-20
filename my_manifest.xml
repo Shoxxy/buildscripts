@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-  <project name="Hrubak/buildscripts" path="buildscripts" remote="github">
+  <project name="Hrubak/buildscripts" path="buildscripts" remote="github" revision="cm-10.2" >
     <copyfile dest="autobuild.sh" src="autobuild.sh" />
   </project>
   <project name="Hrubak/d2spr-tools.git" path="d2spr-tools" remote="github" revision="cm-10.2" />
