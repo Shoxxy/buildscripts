@@ -1,13 +1,13 @@
 #!/bin/bash
 
 A_TOP=${PWD}
-CUR_DIR=`dirname $0`
+CUR_DIR=$(dirname $0)
 DATE=$(date +%D)
-MACHINE_TYPE=`uname -m`
+MACHINE_TYPE=$(uname -m)
 CM_VERSION=10.2
 
 # Common defines (Arch-dependent)
-case `uname -s` in
+case $(uname -s) in
     Darwin)
         txtrst='\033[0m'  # Color off
         txtred='\033[0;31m' # Red
