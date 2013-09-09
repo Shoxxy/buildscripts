@@ -10,14 +10,14 @@ CMD="${1}"
 CMROOT=CM10								#folder name of your CM source ie: 'system'
 DIR=~/android/${CMROOT}							#Set Working Dir
 OUT=$DIR/out/target/product/${CMD}
-NOW=`date +%s`
+NOW=$(date +%s)
 RELVER="${2}"								#Name our build
 DATE=$(date +%D)
-MACHINE_TYPE=`uname -m`
+MACHINE_TYPE=$(uname -m)
 
 
 # Common defines (Arch-dependent)
-case `uname -s` in
+case $(uname -s) in
     Darwin)
         txtrst='\033[0m' # Color off
         txtred='\033[0;31m' # Red
