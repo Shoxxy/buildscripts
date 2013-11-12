@@ -4,4 +4,5 @@
     <copyfile dest="autobuild.sh" src="autobuild.sh" />
   </project>
   <project name="Hrubak/d2spr-tools.git" path="d2spr-tools" remote="github" revision="cm11.0" />
+  <project name="Hrubak/d2vzw-tools.git" path="d2vzw-tools" remote="github" revision="cm11.0" />
 </manifest>
