@@ -53,10 +53,7 @@ esac
 			echo -e "${txtylw}Applying patches...${txtrst}"
 			${CMD}-tools/apply.sh
 			MESG=$?
-				if [ "$MESG" -ne "0" ]; then
-					echo "PATCH FAILED : ${MESG}"
-					exit
-				fi
+			
 			echo -e "${txtgrn}EXIT PASS : ${MESG}${txtrst}"
 		else
 			repo abandon auto
