@@ -27,6 +27,9 @@ also you can set the device and add a releasename
 will build a a GalaxySIII Verizon rom named cm-11.0-{date}-EXPERIMENTAL-d2vzw-test.zip
 
 If you want to use my auto patch script add (device)-tools to your roomservice.xml
-ie: <project name="Hrubak/d2vzw-tools.git" path="d2vzw-tools" remote="github" revision="cm11.0" />
+ie: 
+```
+<project name="Hrubak/d2vzw-tools.git" path="d2vzw-tools" remote="github" revision="cm11.0" />
+```
 
 
