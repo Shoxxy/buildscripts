@@ -5,9 +5,9 @@
 
 # Lets set some variables
 
-CM_VERSION=10.1
+CM_VERSION=11.0
 CMD="${1}"
-CMROOT=CM10								#folder name of your CM source ie: 'system'
+CMROOT=CM11								#folder name of your CM source ie: 'system'
 DIR=~/android/${CMROOT}							#Set Working Dir
 OUT=$DIR/out/target/product/${CMD}
 NOW=`date +%s`
@@ -127,11 +127,11 @@ esac
        			echo -e "${txtred}Edit autobuild.sh and set CROOT=Path_to_your_Source"
         		echo -e "${txtred}or whatever your CM source dir is"
         		echo -e "\r\n ${txtrst}"
-        		echo -e "${txtgrn}Source Dir? (CM10):${txtrst}"
+        		echo -e "${txtgrn}Source Dir? (CM11):${txtrst}"
 			read CMROOT
 
 			if [ "$CMROOT" = "" ]; then
-				CMROOT=CM10
+				CMROOT=CM11
 			fi
 		else
 			echo -e "${txtgrn}Working_dir=${DIR} ${txtrst}"

@@ -4,7 +4,7 @@ A_TOP=${PWD}
 CUR_DIR=`dirname $0`
 DATE=$(date +%D)
 MACHINE_TYPE=`uname -m`
-CM_VERSION=10.1
+CM_VERSION=11.0
 
 # Common defines (Arch-dependent)
 case `uname -s` in
@@ -164,6 +164,7 @@ prepare_environment()
         echo "2) cm-9 (ics)"
         echo "3) cm-10 (jellybean mr0)"
         echo "4) cm-10.1 (jellybean mr1)"
+	echo "5) cm-11.0 (kit-kat)
         read -n1 branch
         echo -e "\r\n"
 
@@ -184,6 +185,10 @@ prepare_environment()
                 # cm-10.1
                 branch="cm-10.1"
                 ;;
+	    "5")
+		# cm-11.0
+		branch="cm-11.0"
+		;;
             *)
                 # no branch
                 echo -e "${txtred}No branch choosen. Aborting."
@@ -192,11 +197,11 @@ prepare_environment()
                 ;;
         esac
 
-        echo "Target Directory (~/android/CM10):"
+        echo "Target Directory (~/android/CM11):"
         read working_directory
 
         if [ ! -n $working_directory ]; then 
-            working_directory="~/android/CM10"
+            working_directory="~/android/CM11"
         fi
 
         echo "Installing to $working_directory"
