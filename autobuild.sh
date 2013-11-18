@@ -40,6 +40,7 @@ esac
 # Get things up to date :)
 	repo_sync()
 	{
+		repo abandon auto
 		echo -e "${txtylw}Syncing Source...${txtrst}"
 		repo sync -j24
 		echo "Files Synced"
