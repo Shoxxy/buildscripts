@@ -211,7 +211,7 @@ prepare_environment()
         fi
         
         export PATH=~/bin:$PATH
-        curl https://dl-ssl.google.com/dl/googlesource/git-repo/repo > ~/bin/repo
+        curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
         chmod a+x ~/bin/repo
         source ~/.profile
         repo selfupdate
