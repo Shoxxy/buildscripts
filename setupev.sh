@@ -197,7 +197,7 @@ prepare_environment()
                 ;;
         esac
 
-        echo "Target Directory (~/android/CM11):"
+        echo "Target Directory ~/android/CM11:"
         read working_directory
 
         if [ ! -n $working_directory ]; then 
