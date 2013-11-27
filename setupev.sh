@@ -206,9 +206,11 @@ prepare_environment()
         fi
 
         echo "Installing to $working_directory"
-        if [ ! -d "~/bin"]
+        
+        if [ ! -d "~/bin"]; then
         mkdir ~/bin
         fi
+        
         export PATH=~/bin:$PATH
         curl https://dl-ssl.google.com/dl/googlesource/git-repo/repo > ~/bin/repo
         chmod a+x ~/bin/repo
