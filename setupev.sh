@@ -201,12 +201,14 @@ prepare_environment()
         read working_directory
 
         if [ ! -n $working_directory ]; then 
-            working_directory="~/android/CM11"
-            mkdir ~/android/CM11
+            $working_directory="~/android/CM11"
+            mkdir $working_directory
         fi
 
         echo "Installing to $working_directory"
+        if [ ! -d "~/bin"]
         mkdir ~/bin
+        fi
         export PATH=~/bin:$PATH
         curl https://dl-ssl.google.com/dl/googlesource/git-repo/repo > ~/bin/repo
         chmod a+x ~/bin/repo
