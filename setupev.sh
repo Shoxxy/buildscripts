@@ -207,7 +207,7 @@ prepare_environment()
 
         echo "Installing to $working_directory"
         
-        if [ ! -d "~/bin"]; then
+        if [ ! -d ~/bin]; then
         mkdir ~/bin
         fi
         
