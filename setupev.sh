@@ -206,9 +206,8 @@ prepare_environment()
 
         echo "Installing to $working_directory"
         
-        $bin="~/bin"
-        if [ ! -d $bin ]; then
-            mkdir -p $bin
+        if [ ! -d $HOME/bin ]; then
+            mkdir -p $HOME/bin
         fi
         
         export PATH=~/bin:$PATH
