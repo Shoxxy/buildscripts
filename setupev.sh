@@ -164,7 +164,7 @@ prepare_environment()
         echo "2) cm-9 (ics)"
         echo "3) cm-10 (jellybean mr0)"
         echo "4) cm-10.1 (jellybean mr1)"
-	echo "5) cm-11.0 (kit-kat)
+	echo "5) cm-11.0 (kit-kat)"
         read -n1 branch
         echo -e "\r\n"
 
@@ -197,11 +197,12 @@ prepare_environment()
                 ;;
         esac
 
-        echo "Target Directory ~/android/CM11:"
+        echo "Target Directory (~/android/CM11):"
         read working_directory
 
         if [ ! -n $working_directory ]; then 
             working_directory="~/android/CM11"
+            mkdir ~/android/CM11
         fi
 
         echo "Installing to $working_directory"
