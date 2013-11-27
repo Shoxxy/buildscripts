@@ -197,18 +197,18 @@ prepare_environment()
                 ;;
         esac
 
-        echo "Target Directory (~/android/CM11):"
+        echo "Enter Target Directory (~/android/CM11):"
         read working_directory
 
         if [ ! -n $working_directory ]; then 
             $working_directory="~/android/CM11"
-            mkdir $working_directory
         fi
 
         echo "Installing to $working_directory"
         
-        if [ ! -d ~/bin]; then
-        mkdir ~/bin
+        $bin="~/bin"
+        if [ ! -d $bin ]; then
+            mkdir -p $bin
         fi
         
         export PATH=~/bin:$PATH
