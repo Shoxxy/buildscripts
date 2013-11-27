@@ -201,7 +201,7 @@ prepare_environment()
         read working_directory
 
         if [ ! -n $working_directory ]; then 
-            $working_directory="~/android/CM11"
+            working_directory="~/android/CM11"
         fi
 
         echo "Installing to $working_directory"
