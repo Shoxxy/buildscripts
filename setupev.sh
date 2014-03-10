@@ -67,11 +67,10 @@ install_arch_packages()
 install_ubuntu_packages()
 {
     # x86_64       
-    apt-get install git-core gnupg flex bison gperf build-essential \
-    zip curl libc6-dev libncurses5-dev:i386 x11proto-core-dev \
-    libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-glx:i386 \
-    libgl1-mesa-dev g++-multilib mingw32 openjdk-6-jdk tofrodos \
-    python-markdown libxml2-utils xsltproc zlib1g-dev:i386 pngcrush
+    apt-get install bison build-essential curl flex git-core gnupg gperf libesd0-dev \
+    libncurses5-dev libsdl1.2-dev libwxgtk2.8-dev libxml2 libxml2-utils \
+    lzop openjdk-6-jdk openjdk-6-jre pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev \
+    g++-multilib gcc-multilib lib32ncurses5-dev lib32readline-gplv2-dev lib32z1-dev
 }
 
 prepare_environment()
