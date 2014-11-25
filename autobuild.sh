@@ -8,7 +8,7 @@
 CM_VERSION=12.0
 CMD="${1}"
 CMROOT=CM12								#folder name of your CM source ie: 'system'
-DIR=~/android/${CMROOT}							#Set Working Dir
+DIR=~/${CMROOT}							#Set Working Dir
 OUT=$DIR/out/target/product/${CMD}
 NOW=`date +%s`
 RELVER="${2}"								#Name our build
