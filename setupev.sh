@@ -4,7 +4,7 @@ A_TOP=${PWD}
 CUR_DIR=`dirname $0`
 DATE=$(date +%D)
 MACHINE_TYPE=`uname -m`
-CM_VERSION=11.0
+CM_VERSION=12.0
 
 # Common defines (Arch-dependent)
 case `uname -s` in
@@ -50,9 +50,8 @@ check_machine_type() {
 
 install_sun_jdk()
 {
-    add-apt-repository "deb http://archive.canonical.com/ lucid partner"
     apt-get update
-    apt-get install sun-java6-jdk
+    apt-get install openjdk-7-jdk
 }
 
 install_arch_packages()
@@ -66,11 +65,13 @@ install_arch_packages()
 
 install_ubuntu_packages()
 {
-    # x86_64       
-    apt-get install bison build-essential curl flex git-core gnupg gperf libesd0-dev \
-    libncurses5-dev libsdl1.2-dev libwxgtk2.8-dev libxml2 libxml2-utils \
-    lzop openjdk-6-jdk openjdk-6-jre pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev \
-    g++-multilib gcc-multilib lib32ncurses5-dev lib32readline-gplv2-dev lib32z1-dev
+    # x86_64 
+    apt-get update       
+    apt-get install bison build-essential curl flex git-core git curl gnupg gperf libesd0-dev \
+    libncurses5-dev:i386 libsdl1.2-dev libwxgtk2.8-dev libxml2 libxml2-utils libc6-dev x11proto-core-dev \
+    lzop pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-glx:i386 \
+    libgl1-mesa-dev  mingw32 tofrodos python-markdown libxml2-utils xsltproc zlib1g-dev:i386 \
+    g++-multilib gcc-multilib lib32ncurses5-dev lib32readline-gplv2-dev lib32z1-dev 
 }
 
 prepare_environment()
@@ -80,8 +81,8 @@ prepare_environment()
     echo "2) Ubuntu 11.10"
     echo "3) Ubuntu 12.04"
     echo "4) Ubuntu 12.10"
-    echo "5) Arch Linux"
-    echo "6) Debian"
+    # echo "5) Arch Linux"
+    # echo "6) Debian"
     read -n1 distribution
     echo -e "\r\n"
 
@@ -109,12 +110,14 @@ prepare_environment()
     "3")
         # Ubuntu 12.04
         echo "Installing packages for Ubuntu 12.04"
+        install_sun_jdk
         install_ubuntu_packages
         ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so
         ;;
     "4")
         # Ubuntu 12.10
         echo "Installing packages for Ubuntu 12.10"
+        install_sun_jdk
         install_ubuntu_packages
         ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so
         ;;
@@ -164,6 +167,7 @@ prepare_environment()
         echo "3) cm-10 (jellybean mr0)"
         echo "4) cm-10.1 (jellybean mr1)"
 	echo "5) cm-11.0 (kit-kat)"
+        echo "6) cm-12.0 (lollipop)"
         read -n1 branch
         echo -e "\r\n"
 
@@ -188,6 +192,10 @@ prepare_environment()
 		# cm-11.0
 		branch="cm-11.0"
 		;;
+            "6")
+                # cm-12.0
+                branch="cm-12.0"
+                ;;
             *)
                 # no branch
                 echo -e "${txtred}No branch choosen. Aborting."
@@ -196,11 +204,11 @@ prepare_environment()
                 ;;
         esac
 
-        echo "Enter Target Directory (~/android/CM11):"
+        echo "Enter Target Directory (~/android/CM12):"
         read working_directory
 
         if [ ! -n $working_directory ]; then 
-            working_directory="$HOME/android/CM11"
+            working_directory="$HOME/android/CM12"
         fi
 
         echo "Installing to $working_directory"
