@@ -14,6 +14,13 @@ sudo ./setupev.sh
 
 Then just follow the prompts :)
 
+or if you have a build environment already setup:
+```
+mkdir -p .repo/local_manifests
+touch .repo/local_manifests/roomservice.xml
+curl https://raw.githubusercontent.com/Hrubak/buildscripts/cm-12.0/my_manifest.xml > .repo/local_manifests/roomservice.xml
+repo sync
+```
 Build CyanogenMod
 ==================
 ```
