@@ -14,6 +14,7 @@ NOW=`date +%s`
 RELVER="${2}"								#Name our build
 DATE=$(date +%D)
 MACHINE_TYPE=`uname -m`
+DROPBOX=~/Dropbox/DEV/$CMROOT
 
 
 # Common defines (Arch-dependent)
@@ -136,6 +137,24 @@ esac
 		fi
 	}
 
+#Lets Move our files to DropBox
+	drop_box()
+	{
+	        cp $OUT/${LBUILD}*d710*.zip $DROPBOX/
+		cp $OUT/${LBUILD}*d710*.zip.md5sum $DROPBOX/
+		echo "Files Copied to DropBox/Public/"${BUILD}
+	}		
+
+#Get DropBox Upload Status and echo it
+	get_dstatus()
+	{
+	        while [ "${DSTATUS}" != "Idle" ] ;do
+	               DSTATUS=`dropbox status`
+				echo -ne " \r${DSTATUS}\r"
+        	       sleep 1
+		   done
+	}
+
 #Remove Patches
 	clear_patch()
 	{
@@ -213,6 +232,7 @@ START=$(date +%s)
 		build_it
 		rm $OUT/*${CMD}-ota*.zip
 		md5_sum
+		drop_box
 		echo -e "${txtgrn}Build Complete...!!${txtrst}"
 		cd $DIR
 		cd ..
@@ -239,3 +259,4 @@ E_SEC=$((ELAPSED - E_MIN * 60))
 printf "${txtgrn}Elapsed: "
 [ $E_MIN != 0 ] && printf "%d min(s) " $E_MIN
 printf "%d sec(s)\n ${txtrst}" $E_SEC
+get_dstatus
