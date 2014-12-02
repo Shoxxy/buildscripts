@@ -140,8 +140,8 @@ esac
 #Lets Move our files to DropBox
 	drop_box()
 	{
-	        cp $OUT/${LBUILD}*d710*.zip $DROPBOX/
-		cp $OUT/${LBUILD}*d710*.zip.md5sum $DROPBOX/
+	        cp $OUT/*${CMD}*.zip $DROPBOX/
+		cp $OUT/*${CMD}*.zip.md5sum $DROPBOX/
 		echo "Files Copied to DropBox/Public/"${BUILD}
 	}		
 
