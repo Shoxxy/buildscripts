@@ -5,4 +5,5 @@
   </project>
   <project name="Hrubak/d2spr-tools.git" path="d2spr-tools" remote="github" revision="cm-12.0" />
   <project name="Hrubak/d2vzw-tools.git" path="d2vzw-tools" remote="github" revision="cm-12.0" />
+  <project name="Hrubak/ls990-tools.git" path="ls990-tools" remote="github" revision="cm-12.0" />
 </manifest>
