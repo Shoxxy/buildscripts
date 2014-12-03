@@ -142,7 +142,7 @@ esac
 	{
 	        cp $OUT/*${CMD}*.zip $DROPBOX/
 		cp $OUT/*${CMD}*.zip.md5sum $DROPBOX/
-		echo "Files Copied to DropBox/Public/"${BUILD}
+		echo "Files Copied to DropBox/DEV/"${BUILD}
 	}		
 
 #Get DropBox Upload Status and echo it
@@ -259,4 +259,4 @@ E_SEC=$((ELAPSED - E_MIN * 60))
 printf "${txtgrn}Elapsed: "
 [ $E_MIN != 0 ] && printf "%d min(s) " $E_MIN
 printf "%d sec(s)\n ${txtrst}" $E_SEC
-get_dstatus
+
