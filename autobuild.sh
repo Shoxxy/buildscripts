@@ -14,7 +14,7 @@ NOW=`date +%s`
 RELVER="${2}"								#Name our build
 DATE=$(date +%D)
 MACHINE_TYPE=`uname -m`
-DROPBOX=~/Dropbox/DEV/$CMROOT
+#DROPBOX=~/Dropbox/DEV/$CMROOT
 
 
 # Common defines (Arch-dependent)
@@ -232,7 +232,7 @@ START=$(date +%s)
 		build_it
 		rm $OUT/*${CMD}-ota*.zip
 		md5_sum
-		drop_box
+		#drop_box
 		echo -e "${txtgrn}Build Complete...!!${txtrst}"
 		cd $DIR
 		cd ..
