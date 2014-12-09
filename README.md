@@ -40,3 +40,4 @@ ie:
 ```
 
 
+There are some NOOB steps left out... you have some edits to make on your own!
