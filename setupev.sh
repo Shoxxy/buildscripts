@@ -81,7 +81,7 @@ prepare_environment()
     echo "2) Ubuntu 11.10"
     echo "3) Ubuntu 12.04"
     echo "4) Ubuntu 12.10"
-    # echo "5) Arch Linux"
+    echo "5) Skip"
     # echo "6) Debian"
     read -n1 distribution
     echo -e "\r\n"
@@ -122,11 +122,8 @@ prepare_environment()
         ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so
         ;;
     "5")
-        # Arch Linux
-        echo "Installing packages for Arch Linux"
-        install_arch_packages
-        mv /usr/bin/python /usr/bin/python.bak
-        ln -s /usr/bin/python2 /usr/bin/python
+        # Skip
+        echo "Skiping Packages"
         ;;
     "6")
         # Debian
