@@ -7,7 +7,7 @@ Use setupev.sh to setup your build environment
 ```
 cd ~
 touch setupev.sh
-curl https://raw.github.com/hrubak/buildscripts/cm-12.0/setupev.sh > setupev.sh
+curl https://raw.githubusercontent.com/Hrubak/buildscripts/cm-12.0/setupev.sh > setupev.sh
 chmod a+x setupev.sh
 sudo ./setupev.sh
 ```
