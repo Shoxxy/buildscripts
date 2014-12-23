@@ -60,16 +60,6 @@ esac
 		else
 			repo abandon auto
 		fi		
-		# Get prebuilts once per day
-			prebuilts=$(cat prebuilts.log)
-		if [ "$DATE" != "$prebuilts" ]; then
-			echo -e "${txtylw}Downloading prebuilts...${txtrst}"
-			pushd vendor/cm
-			./get-prebuilts
-			popd
-        echo $DATE > prebuilts.log
-		fi
-
 	}
 
 # Setting up Build Environment
