@@ -220,12 +220,11 @@ START=$(date +%s)
 		env_setup
 		extras
 		build_it
-		rm $OUT/*${CMD}-ota*.zip
+		clear_patch
 		md5_sum
 		#drop_box
 		echo -e "${txtgrn}Build Complete...!!${txtrst}"
 		cd $DIR
-		cd ..
 	}
 
 #Start Up...
