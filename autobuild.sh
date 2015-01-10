@@ -56,8 +56,7 @@ esac
 			${CMD}-tools/apply.sh
 			MESG=$?
 			
-			if [ "${MESG}" == "0" ]; then
-				echo -e "${txtgrn}EXIT PASS : GOOD${txtrst}"
+			echo -e "${txtgrn}EXIT PASS : ${MESG}${txtrst}"
 		else
 			repo abandon auto
 		fi		
