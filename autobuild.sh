@@ -43,7 +43,7 @@ esac
 	{
 		repo abandon auto
 		echo -e "${txtylw}Syncing Source...${txtrst}"
-		repo sync -j12
+		reposync
 		echo "Files Synced"
 	}
 	
@@ -69,6 +69,11 @@ esac
 		cd $DIR
 		echo -e "${txtgrn}Setting up Build Environment...${txtrst}"
 		. build/envsetup.sh
+	}
+	
+# Set Build Target
+	target()
+	{
 		lunch ${lunch}
 	}
 
@@ -183,6 +188,7 @@ echo -e "\r\n ${txtrst}"
 
 # Starting Timer
 START=$(date +%s)
+env_setup
 
 # Run script specific settings
 	case "${CMD}" in
@@ -191,7 +197,7 @@ START=$(date +%s)
 			exit
 			;;
 		clean)
-			make clean
+			mka clean
 			rm -rf ./out/target/product
 			exit
 			;;
@@ -215,7 +221,7 @@ START=$(date +%s)
 	case $clean in
 		"Y" | "y")
 			echo -e "${txtylw}Making $OUT Clean${txtrst}"
-			make clean
+			mka clean
 	        	rm -rf ./out/target/product
 			;;
 		"clobber")
@@ -235,7 +241,7 @@ START=$(date +%s)
 		upload=y
 	fi
 		repo_sync
-		env_setup
+		target
 		extras
 		build_it
 		rm $OUT/*${CMD}-ota*.zip
