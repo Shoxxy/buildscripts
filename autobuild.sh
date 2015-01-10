@@ -61,6 +61,7 @@ esac
 			else
 				echo -e "${txtgrn}EXIT PASS : ERROR${txtrst}"
 				exit 1
+			fi
 		else
 			repo abandon auto
 		fi		
