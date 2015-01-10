@@ -56,7 +56,11 @@ esac
 			${CMD}-tools/apply.sh
 			MESG=$?
 			
-			echo -e "${txtgrn}EXIT PASS : ${MESG}${txtrst}"
+			if ${MESG} == 0 ; then
+				echo -e "${txtgrn}EXIT PASS : GOOD${txtrst}"
+			else
+				echo -e "${txtgrn}EXIT PASS : ERROR${txtrst}"
+				exit 1
 		else
 			repo abandon auto
 		fi		
@@ -94,16 +98,16 @@ esac
 	{
 		if [ -z "${CMD}" ]; then
         		echo -e "${txtred}No build target set."
-       			echo -e "${txtred}Usage: ./autobuild.sh d2spr (complete build)"
-        		echo -e "${txtred}       ./autobuild.sh d2spr foo (Custom Release Version)"
+       			echo -e "${txtred}Usage: ./autobuild.sh ls990 (complete build)"
+        		echo -e "${txtred}       ./autobuild.sh ls990 foo (Custom Release Version)"
         		echo -e "${txtred}       ./autobuild.sh clean"
         		echo -e "${txtred}       ./autobuild.sh clobber (Clobber)"
         		echo -e "\r\n ${txtrst}"
-        		echo -e "${txtgrn}Target device? (d2spr):${txtrst}"
+        		echo -e "${txtgrn}Target device? (ls990):${txtrst}"
 			read CMD
 
 			if [ "$CMD" = "" ]; then
-			CMD=d2spr
+			CMD=ls990
 			fi
 		fi
 	}
@@ -180,7 +184,7 @@ START=$(date +%s)
 			exit
 			;;
 		clean)
-			make clean
+			mka clean
 			rm -rf ./out/target/product
 			exit
 			;;
@@ -204,7 +208,7 @@ START=$(date +%s)
 	case $clean in
 		"Y" | "y")
 			echo -e "${txtylw}Making $OUT Clean${txtrst}"
-			make clean
+			mka clean
 	        	rm -rf ./out/target/product
 			;;
 		"clobber")
