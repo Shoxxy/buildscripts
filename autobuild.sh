@@ -1,6 +1,6 @@
 #!/bin/bash
-#to use run . build.sh {device} {extra outputname}
-#example:/$ . build d2spr ImAdEtHiS
+#to use run . build.sh {device}
+#example:/$ . build ls990
 
 
 # Lets set some variables
@@ -11,10 +11,10 @@ CMROOT=CM12								#folder name of your CM source ie: 'system'
 DIR=~/android/${CMROOT}							#Set Working Dir
 OUT=$DIR/out/target/product/${CMD}
 NOW=`date +%s`
-RELVER="${2}"								#Name our build
 DATE=$(date +%D)
 MACHINE_TYPE=`uname -m`
 #DROPBOX=~/Dropbox/DEV/$CMROOT
+MEGA=~/android/MEGASync
 
 
 # Common defines (Arch-dependent)
@@ -43,7 +43,7 @@ esac
 	{
 		repo abandon auto
 		echo -e "${txtylw}Syncing Source...${txtrst}"
-		repo sync -j24
+		repo sync -j12
 		echo "Files Synced"
 	}
 	
@@ -131,12 +131,29 @@ esac
 		fi
 	}
 
-#Lets Move our files to DropBox
-	drop_box()
+#Lets Move our files to MEGA.CO.NZ
+	upload()
 	{
-	        cp $OUT/*${CMD}*.zip $DROPBOX/
-		cp $OUT/*${CMD}*.zip.md5sum $DROPBOX/
-		echo "Files Copied to DropBox/DEV/"${BUILD}
+		echo -e "${txtred}Do you want to Upload to MEGA? (y/n)[y]${txtrst}"
+		read -t20 upload
+		echo -e "\r\n"
+	if [ -z $upload ]; then
+		upload=y
+	fi
+	
+	case $upload in
+		"Y" | "y")
+			echo -e "${txtylw}Uploading New Build to MEGA${txtrst}"
+			cp $OUT/*${CMD}*.zip ${MEGA}/
+			#cp $OUT/*${CMD}*.zip.md5sum ${MEGA}/
+			echo "Build Copied to "${MEGA}
+			;;
+		"N" | "n")
+			echo -e "${txtblu}Skipping upload${txtrst}"
+			# Continue
+			;;
+	esac
+	        
 	}		
 
 #Get DropBox Upload Status and echo it
@@ -224,9 +241,10 @@ START=$(date +%s)
 		env_setup
 		extras
 		build_it
+		rm $OUT/*${CMD}-ota*.zip
 		clear_patch
 		md5_sum
-		#drop_box
+		upload
 		echo -e "${txtgrn}Build Complete...!!${txtrst}"
 		cd $DIR
 	}
