@@ -134,13 +134,6 @@ esac
 #Lets Move our files to MEGA.CO.NZ
 	upload()
 	{
-		echo -e "${txtred}Do you want to Upload to MEGA? (y/n)[y]${txtrst}"
-		read -t20 upload
-		echo -e "\r\n"
-	if [ -z $upload ]; then
-		upload=y
-	fi
-	
 	case $upload in
 		"Y" | "y")
 			echo -e "${txtylw}Uploading New Build to MEGA${txtrst}"
@@ -216,7 +209,7 @@ START=$(date +%s)
 
 
 	echo -e "${txtred}Do you want to MAKE clean? (y/n/clobber)[y]${txtrst}"
-		read -t5 clean
+		read -t10 clean
 		echo -e "\r\n"
 	if [ -z $clean ]; then
 		clean=y
@@ -237,6 +230,13 @@ START=$(date +%s)
 			# Continue
 			;;
 	esac
+	
+	echo -e "${txtred}Do you want to Upload to MEGA? (y/n)[y]${txtrst}"
+		read -t10 upload
+		echo -e "\r\n"
+	if [ -z $upload ]; then
+		upload=y
+	fi
 		repo_sync
 		env_setup
 		extras
