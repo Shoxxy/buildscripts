@@ -195,7 +195,7 @@ START=$(date +%s)
 			exit
 			;;
 		clean)
-			mka clean
+			make clean
 			rm -rf ./out/target/product
 			exit
 			;;
@@ -219,7 +219,7 @@ START=$(date +%s)
 	case $clean in
 		"Y" | "y")
 			echo -e "${txtylw}Making $OUT Clean${txtrst}"
-			mka clean
+			make clean
 	        	rm -rf ./out/target/product
 			;;
 		"clobber")
