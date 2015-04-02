@@ -164,7 +164,7 @@ prepare_environment()
         echo "3) cm-10 (jellybean mr0)"
         echo "4) cm-10.1 (jellybean mr1)"
 	echo "5) cm-11.0 (kit-kat)"
-        echo "6) cm-12.0 (lollipop)"
+        echo "6) cm-12.1 (lollipop)"
         read -n1 branch
         echo -e "\r\n"
 
@@ -191,7 +191,7 @@ prepare_environment()
 		;;
             "6")
                 # cm-12.0
-                branch="cm-12.0"
+                branch="cm-12.1"
                 ;;
             *)
                 # no branch
