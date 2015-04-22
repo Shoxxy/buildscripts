@@ -14,7 +14,7 @@ NOW=`date +%s`
 DATE=$(date +%D)
 MACHINE_TYPE=`uname -m`
 #DROPBOX=~/Dropbox/DEV/$CMROOT
-MEGA=~/android/MEGASync
+MEGA=~/android/MEGASync/CM12.1
 
 
 # Common defines (Arch-dependent)
