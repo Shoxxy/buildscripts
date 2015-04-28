@@ -139,10 +139,10 @@ esac
 	{
 	case $upload in
 		"Y" | "y")
-			echo -n "${txtylw}Uploading Build to AFH..A${txtrst}"
+			echo "${txtylw}Uploading Build to AFH${txtrst}"
 			curl -T $OUT/*${CMD}*.zip -u ${AFH}
-			echo -n "${txtylw}Build Upload to AFH is CompleteA${txtrst}"
-			echo -e "${txtylw}Uploading New Build to MEGA${txtrst}"
+			echo "${txtylw}Build Upload to AFH is Complete${txtrst}"
+			echo "${txtylw}Uploading New Build to MEGA${txtrst}"
                         cp $OUT/*${CMD}*.zip ${MEGA}/
                         #cp $OUT/*${CMD}*.zip.md5sum ${MEGA}/
                         echo -n "Build Copied to "${MEGA}
@@ -203,6 +203,10 @@ env_setup
 		clean)
 			mka clean
 			rm -rf ./out/target/product
+			exit
+			;;
+		upload)
+			upload
 			exit
 			;;
 		*)
