@@ -1,6 +1,8 @@
-echo -n "Enter password: "; read PSWD
+PSWD=`cat ~/android/pswd.txt`
 
 cd ~/android/CM12/out/target/product/ls990/ 
-curl -T cm-*.zip -u hrubak:${PSWD} ftp://uploads.fl1.androidfilehost.com --ftp-create-dirs
+echo "uploading file to AndroidFileHost.com"
+curl -T cm-*.zip -u ${PSWD} ftp://uploads.fl1.androidfilehost.com --ftp-create-dirs
 cd ../../../..
+
 
