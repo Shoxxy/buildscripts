@@ -138,7 +138,7 @@ esac
 	case $upload in
 		"Y" | "y")
 			echo "${txtylw}Uploading Build to AFH${txtrst}"
-			curl -T $OUT/*${CMD}*.zip -u ${PSWD} ftp://uploads.fl1.androidfilehost.com --ftp-create-dirs
+			curl -T $OUT/*${CMD}*.zip -u ${PSWD} ftp://uploads.fl1.androidfilehost.com
 			echo "${txtylw}Build Upload to AFH is Complete${txtrst}"
 			echo "${txtylw}Uploading New Build to MEGA${txtrst}"
                         cp $OUT/*${CMD}*.zip ${MEGA}/
