@@ -16,8 +16,6 @@ MACHINE_TYPE=`uname -m`
 #DROPBOX=~/Dropbox/DEV/$CMROOT
 MEGA=~/android/MEGASync/CM12.1
 PSWD=`cat ~/android/pswd.txt`
-AFH=${PSWD} ftp://uploads.fl1.androidfilehost.com --ftp-create-dirs
-
 
 # Common defines (Arch-dependent)
 case `uname -s` in
@@ -140,7 +138,7 @@ esac
 	case $upload in
 		"Y" | "y")
 			echo "${txtylw}Uploading Build to AFH${txtrst}"
-			curl -T $OUT/*${CMD}*.zip -u ${AFH}
+			curl -T $OUT/*${CMD}*.zip -u ${PSWD} ftp://uploads.fl1.androidfilehost.com --ftp-create-dirs
 			echo "${txtylw}Build Upload to AFH is Complete${txtrst}"
 			echo "${txtylw}Uploading New Build to MEGA${txtrst}"
                         cp $OUT/*${CMD}*.zip ${MEGA}/
