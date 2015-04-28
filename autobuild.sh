@@ -15,6 +15,8 @@ DATE=$(date +%D)
 MACHINE_TYPE=`uname -m`
 #DROPBOX=~/Dropbox/DEV/$CMROOT
 MEGA=~/android/MEGASync/CM12.1
+PSWD=`cat ~/android/pswd.txt`
+AFH=${PSWD} ftp://uploads.fl1.androidfilehost.com --ftp-create-dirs
 
 
 # Common defines (Arch-dependent)
@@ -132,15 +134,18 @@ esac
 		fi
 	}
 
-#Lets Move our files to MEGA.CO.NZ
+#Lets Move our files to MEGA.CO.NZ and AFH
 	upload()
 	{
 	case $upload in
 		"Y" | "y")
+			echo -n "${txtylw}Uploading Build to AFH..A${txtrst}"
+			curl -T $OUT/*${CMD}*.zip -u ${AFH}
+			echo -n "${txtylw}Build Upload to AFH is CompleteA${txtrst}"
 			echo -e "${txtylw}Uploading New Build to MEGA${txtrst}"
-			cp $OUT/*${CMD}*.zip ${MEGA}/
-			#cp $OUT/*${CMD}*.zip.md5sum ${MEGA}/
-			echo "Build Copied to "${MEGA}
+                        cp $OUT/*${CMD}*.zip ${MEGA}/
+                        #cp $OUT/*${CMD}*.zip.md5sum ${MEGA}/
+                        echo -n "Build Copied to "${MEGA}
 			;;
 		"N" | "n")
 			echo -e "${txtblu}Skipping upload${txtrst}"
@@ -233,8 +238,8 @@ env_setup
 			;;
 	esac
 	
-	echo -e "${txtred}Do you want to Upload to MEGA? (y/n)[y]${txtrst}"
-		read -t10 upload
+	echo -e "${txtred}Do you want to Upload to AFH/MEGA? (y/n)[y]${txtrst}"
+		read -t2 upload
 		echo -e "\r\n"
 	if [ -z $upload ]; then
 		upload=y
@@ -246,7 +251,6 @@ env_setup
 		rm $OUT/*${CMD}-ota*.zip
 		clear_patch
 		md5_sum
-		upload
 		echo -e "${txtgrn}Build Complete...!!${txtrst}"
 		cd $DIR
 	}
@@ -273,3 +277,4 @@ printf "${txtgrn}Elapsed: "
 [ $E_MIN != 0 ] && printf "%d min(s) " $E_MIN
 printf "%d sec(s)\n ${txtrst}" $E_SEC
 
+upload
