@@ -5,7 +5,7 @@
 
 # Lets set some variables
 
-CM_VERSION=12.0
+CM_VERSION=12.1
 CMD="${1}"
 CMROOT=CM12								#folder name of your CM source ie: 'system'
 DIR=~/android/${CMROOT}							#Set Working Dir
@@ -14,7 +14,7 @@ NOW=`date +%s`
 DATE=$(date +%D)
 MACHINE_TYPE=`uname -m`
 #DROPBOX=~/Dropbox/DEV/$CMROOT
-MEGA=~/android/MEGASync
+MEGA=~/android/MEGASync/CM12.1
 
 
 # Common defines (Arch-dependent)

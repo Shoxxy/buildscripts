@@ -7,7 +7,7 @@ Use setupev.sh to setup your build environment
 ```
 cd ~
 touch setupev.sh
-curl https://raw.githubusercontent.com/Hrubak/buildscripts/cm-12.0/setupev.sh > setupev.sh
+curl https://raw.githubusercontent.com/Hrubak/buildscripts/cm-12.1/setupev.sh > setupev.sh
 chmod a+x setupev.sh
 sudo ./setupev.sh
 ```
@@ -18,7 +18,7 @@ or if you have a build environment already setup:
 ```
 mkdir -p .repo/local_manifests
 touch .repo/local_manifests/roomservice.xml
-curl https://raw.githubusercontent.com/Hrubak/buildscripts/cm-12.0/my_manifest.xml > .repo/local_manifests/roomservice.xml
+curl https://raw.githubusercontent.com/Hrubak/buildscripts/cm-12.1/my_manifest.xml > .repo/local_manifests/roomservice.xml
 repo sync
 ```
 Build CyanogenMod
@@ -27,16 +27,16 @@ Build CyanogenMod
 cd ~/android/CM12
 . autobuild.sh
 ```
-also you can set the device and add a releasename
+also you can set the device
 ```
-. autobuild.sh d2vzw test
+. autobuild.sh ls990
 ```
-will build a a GalaxySIII Verizon rom named cm-12.0-{date}-EXPERIMENTAL-d2vzw-test.zip
+will build a a LG G3 Sprint rom named cm-12.1-{date}-EXPERIMENTAL-ls990.zip
 
 If you want to use my auto patch script add (device)-tools to your roomservice.xml
 ie: 
 ```
-<project name="Hrubak/d2vzw-tools.git" path="d2vzw-tools" remote="github" revision="cm12.0" />
+<project name="Hrubak/ls990-tools.git" path="ls990-tools" remote="github" revision="cm12.1" />
 ```
 
 
