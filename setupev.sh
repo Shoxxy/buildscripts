@@ -4,7 +4,7 @@ A_TOP=${PWD}
 CUR_DIR=`dirname $0`
 DATE=$(date +%D)
 MACHINE_TYPE=`uname -m`
-CM_VERSION=12.0
+Pure_VERSION=n
 
 # Common defines (Arch-dependent)
 case `uname -s` in
@@ -28,7 +28,7 @@ esac
 
 check_root() {
     if [ ! $( id -u ) -eq 0 ]; then
-        echo -e "${txtred}Please run this script as root."
+        echo -e "${txtred}Please run this script as SU (root)."
         echo -e "\r\n ${txtrst}"
         exit
     fi
@@ -51,7 +51,7 @@ check_machine_type() {
 install_sun_jdk()
 {
     apt-get update
-    apt-get install openjdk-7-jdk
+    apt-get install openjdk-8-jdk
 }
 
 install_arch_packages()
@@ -63,24 +63,11 @@ install_arch_packages()
     gcc-libs-multilib gcc-multilib lib32-gcc-libs binutils-multilib libtool-multilib
 }
 
-install_ubuntu_packages()
-{
-    # x86_64 
-    apt-get update       
-    apt-get install bison build-essential curl flex git-core git curl gnupg gperf libesd0-dev \
-    libncurses5-dev libsdl1.2-dev libwxgtk2.8-dev libxml2 libxml2-utils libc6-dev x11proto-core-dev \
-    lzop pngcrush schedtool squashfs-tools xsltproc zip zlib1g-dev libx11-dev:i386 libreadline6-dev:i386 libgl1-mesa-glx:i386 \
-    libgl1-mesa-dev  mingw32 tofrodos python-markdown libxml2-utils xsltproc zlib1g-dev:i386 \
-    g++-multilib gcc-multilib lib32ncurses5-dev lib32readline-gplv2-dev lib32z1-dev 
-}
-
 prepare_environment()
 {
     echo "Which 64-bit distribution are you running?"
-    echo "1) Ubuntu 11.04"
-    echo "2) Ubuntu 11.10"
-    echo "3) Ubuntu 12.04"
-    echo "4) Ubuntu 12.10"
+    echo "1) Ubuntu 14.04"
+    echo "2) Ubuntu 16.04"
     echo "5) Skip"
     # echo "6) Debian"
     read -n1 distribution
@@ -88,66 +75,69 @@ prepare_environment()
 
     case $distribution in
     "1")
-        # Ubuntu 11.04
-        echo "Installing packages for Ubuntu 11.04"
-        install_sun_jdk
-        apt-get install git-core gnupg flex bison gperf build-essential \
-        zip curl zlib1g-dev libc6-dev lib32ncurses5-dev ia32-libs \
-        x11proto-core-dev libx11-dev lib32readline5-dev lib32z-dev \
-        libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown \
-        libxml2-utils xsltproc libx11-dev:i386
+        # Ubuntu 14.04
+        echo "Installing packages for Ubuntu 12.04"
+        sudo apt-add-repository ppa:openjdk-r/ppa -y
+        sudo apt-get update
+        sudo apt-get -y install git-core python gnupg flex bison gperf libsdl1.2-dev libesd0-dev libwxgtk2.8-dev \
+        squashfs-tools build-essential zip curl libncurses5-dev zlib1g-dev openjdk-8-jre openjdk-8-jdk pngcrush \
+        schedtool libxml2 libxml2-utils xsltproc lzop libc6-dev schedtool g++-multilib lib32z1-dev lib32ncurses5-dev \
+        gcc-multilib liblz4-* pngquant ncurses-dev texinfo gcc gperf patch libtool \
+        automake g++ gawk subversion expat libexpat1-dev python-all-dev binutils-static bc libcloog-isl-dev \
+        libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev lzma* \
+        liblzma* w3m android-tools-adb maven ncftp figlet
+        sudo install utils/repo /usr/bin/
+        sudo install utils/ccache /usr/bin/
         ;;
     "2")
-        # Ubuntu 11.10
-        echo "Installing packages for Ubuntu 11.10"
-        install_sun_jdk
-        apt-get install git-core gnupg flex bison gperf build-essential \
-        zip curl zlib1g-dev libc6-dev lib32ncurses5-dev ia32-libs \
-        x11proto-core-dev libx11-dev lib32readline5-dev lib32z-dev \
-        libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown \
-        libxml2-utils xsltproc libx11-dev:i386
+        # Ubuntu 16.04
+        echo "Installing packages for Ubuntu 16.04"
+        sudo apt install -y software-properties-common
+        sudo apt-add-repository ppa:openjdk-r/ppa -y
+        sudo apt update -y
+        sudo apt install git-core python gnupg flex bison gperf libsdl1.2-dev libesd0-dev \
+        squashfs-tools build-essential zip curl libncurses5-dev zlib1g-dev openjdk-8-jre openjdk-8-jdk pngcrush \
+        schedtool libxml2 libxml2-utils xsltproc lzop libc6-dev schedtool g++-multilib lib32z1-dev lib32ncurses5-dev \
+        gcc-multilib liblz4-* pngquant ncurses-dev texinfo gcc gperf patch libtool \
+        automake g++ gawk subversion expat libexpat1-dev python-all-dev bc libcloog-isl-dev \
+        libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev lzma* \
+        liblzma* w3m android-tools-adb maven ncftp htop -y
+        makeversion=$(make -v | head -1 | awk '{print $3}')
+        if [ ! "${makeversion}" == "3.81" ];
+        then
+        echo "Installing make 3.81 instead of ${makeversion}"
+        sudo install utils/make /usr/bin/
+        fi
+        sudo install utils/repo /usr/bin/
+        sudo install utils/ccache /usr/bin/
         ;;
-    "3")
-        # Ubuntu 12.04
-        echo "Installing packages for Ubuntu 12.04"
-        install_sun_jdk
-        install_ubuntu_packages
-        ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so
-        ;;
-    "4")
-        # Ubuntu 12.10
-        echo "Installing packages for Ubuntu 12.10"
-        install_sun_jdk
-        install_ubuntu_packages
-        ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so
-        ;;
-    "5")
-        # Skip
-        echo "Skiping Packages"
-        ;;
-    "6")
-        # Debian
-        echo "Installing packages for Debian"
-        apt-get update
-        apt-get install git-core gnupg flex bison gperf build-essential \
-        zip curl libc6-dev lib32ncurses5 libncurses5-dev x11proto-core-dev \
-        libx11-dev libreadline6-dev lib32readline-gplv2-dev libgl1-mesa-glx \
-        libgl1-mesa-dev g++-multilib mingw32 openjdk-6-jdk tofrodos \
-        python-markdown libxml2-utils xsltproc zlib1g-dev pngcrush \
-        libcurl4-gnutls-dev comerr-dev krb5-multidev libcurl4-gnutls-dev \
-        libgcrypt11-dev libglib2.0-dev libgnutls-dev libgnutls-openssl27 \
-        libgnutlsxx27 libgpg-error-dev libgssrpc4 libgstreamer-plugins-base0.10-dev \
-        libgstreamer0.10-dev libidn11-dev libkadm5clnt-mit8 libkadm5srv-mit8 \
-        libkdb5-6 libkrb5-dev libldap2-dev libp11-kit-dev librtmp-dev libtasn1-3-dev \
-        libxml2-dev tofrodos python-markdown lib32z-dev ia32-libs
-        ln -s /usr/lib32/libX11.so.6 /usr/lib32/libX11.so
-        ln -s /usr/lib32/libGL.so.1 /usr/lib32/libGL.so
-        ;;
-        
     *)
         # No distribution
         echo -e "${txtred}No distribution set. Aborting."
         echo -e "\r\n ${txtrst}"
+        exit
+        ;;
+    esac
+    
+    echo "Do you want ADB setup? (y/n)"
+    read -n1 adb
+    echo -e "\r\n"
+    
+    case $adb in
+    "Y" | "y")
+        if [ ! "$(which adb)" == "" ];
+        then
+        echo Setting up USB Ports
+        sudo curl --create-dirs -L -o /etc/udev/rules.d/51-android.rules -O -L https://raw.githubusercontent.com/snowdream/51-android/master/51-android.rules
+        sudo chmod 644   /etc/udev/rules.d/51-android.rules
+        sudo chown root /etc/udev/rules.d/51-android.rules
+        sudo service udev restart
+        adb kill-server
+        sudo killall adb
+        fi
+        ;;
+    "N" | "n")
+        # nothing to do
         exit
         ;;
     esac
@@ -159,39 +149,14 @@ prepare_environment()
     case $sources in
     "Y" | "y")
         echo "Choose a branch:"
-        echo "1) cm-7 (gingerbread)"
-        echo "2) cm-9 (ics)"
-        echo "3) cm-10 (jellybean mr0)"
-        echo "4) cm-10.1 (jellybean mr1)"
-	echo "5) cm-11.0 (kit-kat)"
-        echo "6) cm-12.1 (lollipop)"
+        echo "1) Nougut"
         read -n1 branch
         echo -e "\r\n"
 
         case $branch in
             "1")
-                # cm-7
-                branch="gingerbread"
-                ;;
-            "2")
-                # cm-9
-                branch="ics"
-                ;;
-            "3")
-                # cm-10
-                branch="jellybean"
-                ;;
-            "4")
-                # cm-10.1
-                branch="cm-10.1"
-                ;;
-	    "5")
-		# cm-11.0
-		branch="cm-11.0"
-		;;
-            "6")
-                # cm-12.0
-                branch="cm-12.1"
+                # Nougaut
+                branch="n"
                 ;;
             *)
                 # no branch
@@ -201,11 +166,11 @@ prepare_environment()
                 ;;
         esac
 
-        echo "Enter Target Directory (~/android/CM12):"
+        echo "Enter Target Directory (~/android/PureNexus):"
         read working_directory
 
         if [ ! -n $working_directory ]; then 
-            working_directory="$HOME/android/CM12"
+            working_directory="$HOME/android/PureNexus"
         fi
 
         echo "Installing to $working_directory"
@@ -215,19 +180,19 @@ prepare_environment()
         fi
         
         export PATH=~/bin:$PATH
-        curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
         chmod a+x ~/bin/repo
         source ~/.profile
         repo selfupdate
         
         mkdir -p $working_directory
         cd $working_directory
-        repo init -u git://github.com/CyanogenMod/android.git -b $branch
+        repo init -u https://github.com/PureNexusProject/manifest.git -b $branch
         mkdir -p $working_directory/.repo/local_manifests
         touch $working_directory/.repo/local_manifests/roomservice.xml
         curl https://raw.githubusercontent.com/Hrubak/buildscripts/$branch/my_manifest.xml > $working_directory/.repo/local_manifests/roomservice.xml
         repo sync -j12
-        echo "Sources synced to $working_directory. Use $working_directory autobuild.sh to start building CyanogenMod"        
+        echo "Sources synced to $working_directory. Use $working_directory autobuild.sh to start building PureNexus"        
         exit
         ;;
     "N" | "n")
@@ -246,7 +211,7 @@ echo -e "${txtylw}        |  __  |    /| | | |  _ |  / /\ \ |  <     "
 echo -e "${txtylw}        | |  | | |\ \| |_| | |_| \/ ____ \| . \    "
 echo -e "${txtylw}        |_|  |_|_| \_\ ____/|____/_/    \_\_|\_\   "
 echo -e "${txtylw} \r\n"
-echo -e "${txtgrn}    CyanogenMod ${CM_VERSION} build environment setup script${txtrst}"
+echo -e "${txtgrn}    PureNexus ${Pure_VERSION} build environment setup script${txtrst}"
 echo -e "${txtylw}"                             
 echo -e "${txtylw} \r\n"
 echo -e "${txtylw} ######################################################################"
