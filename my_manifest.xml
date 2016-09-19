@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-  <project name="Hrubak/buildscripts" path="buildscripts" remote="github">
+  <project name="Hrubak/buildscripts" path="buildscripts" remote="github" revision="PureNexus">
     <copyfile dest="autobuild.sh" src="autobuild.sh" />
   </project>
   <project name="Hrubak/angler-tools.git" path="angler-tools" remote="github" revision="PureNexus" />
