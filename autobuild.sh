@@ -174,7 +174,7 @@ env_setup
 			exit
 			;;
 		*)
-			lunch=PureNexus_${CMD}-userdebug
+			lunch=${CMD}-userdebug
 			brunch=${lunch}
 			;;
 	esac
