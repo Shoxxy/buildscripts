@@ -3,13 +3,5 @@
   <project name="Hrubak/buildscripts" path="buildscripts" remote="github">
     <copyfile dest="autobuild.sh" src="autobuild.sh" />
   </project>
-  <project name="Hrubak/ls990-tools.git" path="ls990-tools" remote="github" revision="cm-12.1" />
-  <project name="TheMuppets/proprietary_vendor_lge" path="vendor/lge" remote="github" />
-  <!-- common -->
-  <project name="CyanogenMod/android_device_qcom_common" path="device/qcom/common" remote="github" />
-  <project name="CyanogenMod/android_hardware_qcom_fm" path="hardware/qcom/fm" remote="github" />
-  <!-- lg -->
-  <project name="CyanogenMod/android_device_lge_g3-common" path="device/lge/g3-common" remote="github" />
-  <project name="CyanogenMod/android_kernel_lge_g3" path="kernel/lge/g3" remote="github" />
-  <project name="CyanogenMod/android_device_lge_ls990" path="device/lge/ls990" remote="github" />
+  <project name="Hrubak/angler-tools.git" path="angler-tools" remote="github" revision="n" />
  </manifest>
