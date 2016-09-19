@@ -1,21 +1,18 @@
 #!/bin/bash
 #to use run . build.sh {device}
-#example:/$ . build ls990
+#example:/$ . build angler
 
 
 # Lets set some variables
 
-CM_VERSION=12.1
+Pure_VERSION=n
 CMD="${1}"
-CMROOT=CM12								#folder name of your CM source ie: 'system'
-DIR=~/android/${CMROOT}							#Set Working Dir
+ROOT=PureNexus							#folder name of your source ie: 'system'
+DIR=~/${ROOT}							#Set Working Dir
 OUT=$DIR/out/target/product/${CMD}
 NOW=`date +%s`
 DATE=$(date +%D)
 MACHINE_TYPE=`uname -m`
-#DROPBOX=~/Dropbox/DEV/$CMROOT
-MEGA=~/android/MEGASync/CM12.1
-PSWD=`cat ~/android/pswd.txt`
 
 # Common defines (Arch-dependent)
 case `uname -s` in
@@ -43,7 +40,7 @@ esac
 	{
 		repo abandon auto
 		echo -e "${txtylw}Syncing Source...${txtrst}"
-		reposync
+		repo sync
 		echo "Files Synced"
 	}
 	
@@ -99,16 +96,16 @@ esac
 	{
 		if [ -z "${CMD}" ]; then
         		echo -e "${txtred}No build target set."
-       			echo -e "${txtred}Usage: ./autobuild.sh ls990 (complete build)"
-        		echo -e "${txtred}       ./autobuild.sh ls990 foo (Custom Release Version)"
+       			echo -e "${txtred}Usage: ./autobuild.sh angler (complete build)"
+        		echo -e "${txtred}       ./autobuild.sh angler foo (Custom Release Version)"
         		echo -e "${txtred}       ./autobuild.sh clean"
         		echo -e "${txtred}       ./autobuild.sh clobber (Clobber)"
         		echo -e "\r\n ${txtrst}"
-        		echo -e "${txtgrn}Target device? (ls990):${txtrst}"
+        		echo -e "${txtgrn}Target device? (angler):${txtrst}"
 			read CMD
 
 			if [ "$CMD" = "" ]; then
-			CMD=ls990
+			CMD=angler
 			fi
 		fi
 	}
@@ -118,51 +115,20 @@ esac
 	{
 		if [ ! -d "$DIR" ]; then
         		echo -e "${txtred}Custom Working Dir set."
-       			echo -e "${txtred}Edit autobuild.sh and set CROOT=Path_to_your_Source"
-        		echo -e "${txtred}or whatever your CM source dir is"
+       			echo -e "${txtred}Edit autobuild.sh and set ROOT=Path_to_your_Source"
+        		echo -e "${txtred}or whatever your source dir is"
         		echo -e "\r\n ${txtrst}"
-        		echo -e "${txtgrn}Source Dir? (CM12):${txtrst}"
-			read CMROOT
+        		echo -e "${txtgrn}Source Dir? (PureNexus):${txtrst}"
+			read ROOT
 
-			if [ "$CMROOT" = "" ]; then
-				CMROOT=CM12
+			if [ "$ROOT" = "" ]; then
+				ROOT=PureNexus
 			fi
 		else
 			echo -e "${txtgrn}Working_dir=${DIR} ${txtrst}"
 		fi
 	}
-
-#Lets Move our files to MEGA.CO.NZ and AFH
-	upload()
-	{
-	case $upload in
-		"Y" | "y")
-			echo -e "${txtylw}Uploading Build to AFH${txtrst}"
-			curl -T $OUT/*${CMD}*.zip -u ${PSWD} ftp://uploads.fl1.androidfilehost.com
-			echo -e "${txtylw}Build Upload to AFH is Complete${txtrst}"
-			echo -e "${txtylw}Uploading New Build to MEGA${txtrst}"
-                        cp $OUT/*${CMD}*.zip ${MEGA}/
-                        #cp $OUT/*${CMD}*.zip.md5sum ${MEGA}/
-                        echo -n "Build Copied to "${MEGA}
-			;;
-		"N" | "n")
-			echo -e "${txtblu}Skipping upload${txtrst}"
-			# Continue
-			;;
-	esac
-	        
-	}		
-
-#Get DropBox Upload Status and echo it
-	get_dstatus()
-	{
-	        while [ "${DSTATUS}" != "Idle" ] ;do
-	               DSTATUS=`dropbox status`
-				echo -ne " \r${DSTATUS}\r"
-        	       sleep 1
-		   done
-	}
-
+	
 #Remove Patches
 	clear_patch()
 	{
@@ -182,7 +148,7 @@ echo -e "${txtblu}        |  __  |    /| | | |  _ |  / /\ \ |  <     "
 echo -e "${txtblu}        | |  | | |\ \| |_| | |_| \/ ____ \| . \    "
 echo -e "${txtblu}        |_|  |_|_| \_\ ____/|____/_/    \_\_|\_\   "
 echo -e "${txtblu} \r\n"
-echo -e "${txtylw}          CyanogenMod ${CM_VERSION} ${CMD} buildscript${txtrst}"
+echo -e "${txtylw}          PureNexus ${Pure_VERSION} ${CMD} buildscript${txtrst}"
 echo -e "${txtblu}"                             
 echo -e "${txtblu} \r\n"
 echo -e "${txtblu} ######################################################################"
@@ -208,13 +174,13 @@ env_setup
 			exit
 			;;
 		*)
-			lunch=cm_${CMD}-userdebug
+			lunch=PureNexus_${CMD}-userdebug
 			brunch=${lunch}
 			;;
 	esac
 		
 		
-	export USE_CCACHE=1 CM_EXPERIMENTAL=1 CM_EXTRAVERSION=${RELVER} CM_FAST_BUILD=1 #OUT_DIR_COMMON_BASE=
+	export USE_CCACHE=1 #OUT_DIR_COMMON_BASE=
 
 
 	echo -e "${txtred}Do you want to MAKE clean? (y/n/clobber)[y]${txtrst}"
@@ -240,12 +206,6 @@ env_setup
 			;;
 	esac
 	
-	echo -e "${txtred}Do you want to Upload to AFH/MEGA? (y/n)[y]${txtrst}"
-		read -t2 upload
-		echo -e "\r\n"
-	if [ -z $upload ]; then
-		upload=y
-	fi
 		repo_sync
 		target
 		extras
@@ -260,10 +220,10 @@ env_setup
 #Start Up...
 if [ ! -d "${DIR}" ]; then
 workingdir
-DIR=~/android/${CMROOT}
+DIR=~/android/${ROOT}
 fi
 cd $DIR
-echo -e "${txtylw}Starting build script ${CM_VERSION} ${CMD}${txtrst}"
+echo -e "${txtylw}Starting build script ${Pure_VERSION} ${CMD}${txtrst}"
 if [ -z "${RELVER}" ]; then
 main
 else
