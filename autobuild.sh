@@ -180,7 +180,7 @@ env_setup
 	esac
 		
 		
-	export USE_CCACHE=1 #OUT_DIR_COMMON_BASE=
+	export USE_CCACHE=1 USE_NINJA=false #OUT_DIR_COMMON_BASE=
 
 
 	echo -e "${txtred}Do you want to MAKE clean? (y/n/clobber)[y]${txtrst}"
