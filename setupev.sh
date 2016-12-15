@@ -143,7 +143,7 @@ prepare_environment()
 	if [ -d $working_directory ]; then
 	echo "Good it exists, moving on"
 	fi
-	if [ ! -d $working_directory ]; them
+	if [ ! -d $working_directory ]; then
 	mkdir -p $working_directory
 	fi
         echo "Installing to $working_directory"
