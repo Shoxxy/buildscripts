@@ -120,14 +120,14 @@ prepare_environment()
     case $sources in
     "Y" | "y")
         echo "Choose a branch:"
-        echo "1) 14.1"
+        echo "1) cm-14.1"
         read -n1 branch
         echo -e "\r\n"
 
         case $branch in
             "1")
                 # Nougaut
-                branch="14.1"
+                branch="cm-14.1"
                 ;;
             *)
                 # no branch
@@ -154,11 +154,11 @@ prepare_environment()
         curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
         chmod a+x ~/bin/repo
         source ~/.profile
-        repo selfupdate
         
         mkdir -p $working_directory
         cd $working_directory
         repo init -u git://github.com/CyanogenMod/android.git -b $branch
+        repo selfupdate
         mkdir -p $working_directory/.repo/local_manifests
         touch $working_directory/.repo/local_manifests/roomservice.xml
         curl https://raw.githubusercontent.com/Hrubak/buildscripts/$branch/my_manifest.xml > $working_directory/.repo/local_manifests/roomservice.xml
