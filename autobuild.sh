@@ -5,9 +5,9 @@
 
 # Lets set some variables
 
-Pure_VERSION=n
+CM_VERSION=14.1
 CMD="${1}"
-ROOT=PureNexus							#folder name of your source ie: 'system'
+ROOT=CM14.1							#folder name of your source ie: 'system'
 DIR=~/${ROOT}							#Set Working Dir
 OUT=$DIR/out/target/product/${CMD}
 NOW=`date +%s`
@@ -122,7 +122,7 @@ esac
 			read ROOT
 
 			if [ "$ROOT" = "" ]; then
-				ROOT=PureNexus
+				ROOT=CM14.1
 			fi
 		else
 			echo -e "${txtgrn}Working_dir=${DIR} ${txtrst}"
@@ -148,7 +148,7 @@ echo -e "${txtblu}        |  __  |    /| | | |  _ |  / /\ \ |  <     "
 echo -e "${txtblu}        | |  | | |\ \| |_| | |_| \/ ____ \| . \    "
 echo -e "${txtblu}        |_|  |_|_| \_\ ____/|____/_/    \_\_|\_\   "
 echo -e "${txtblu} \r\n"
-echo -e "${txtylw}          PureNexus ${Pure_VERSION} ${CMD} buildscript${txtrst}"
+echo -e "${txtylw}          CyanogenMod ${CM_VERSION} ${CMD} buildscript${txtrst}"
 echo -e "${txtblu}"                             
 echo -e "${txtblu} \r\n"
 echo -e "${txtblu} ######################################################################"
@@ -180,7 +180,7 @@ env_setup
 	esac
 		
 		
-	export USE_CCACHE=1 USE_NINJA=false #OUT_DIR_COMMON_BASE=
+	export USE_CCACHE=1 USE_NINJA=true #OUT_DIR_COMMON_BASE=
 
 
 	echo -e "${txtred}Do you want to MAKE clean? (y/n/clobber)[y]${txtrst}"

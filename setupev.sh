@@ -4,7 +4,7 @@ A_TOP=${PWD}
 CUR_DIR=`dirname $0`
 DATE=$(date +%D)
 MACHINE_TYPE=`uname -m`
-Pure_VERSION=n
+CM_VERSION=14.1
 
 # Common defines (Arch-dependent)
 case `uname -s` in
@@ -66,50 +66,21 @@ install_arch_packages()
 prepare_environment()
 {
     echo "Which 64-bit distribution are you running?"
-    echo "1) Ubuntu 14.04"
-    echo "2) Ubuntu 16.04"
-    echo "5) Skip"
+    echo "1) Ubuntu 16.04"
+    echo "2) Skip"
     # echo "6) Debian"
     read -n1 distribution
     echo -e "\r\n"
 
     case $distribution in
     "1")
-        # Ubuntu 14.04
-        echo "Installing packages for Ubuntu 12.04"
-        sudo apt-add-repository ppa:openjdk-r/ppa -y
-        sudo apt-get update
-        sudo apt-get -y install git-core python gnupg flex bison gperf libsdl1.2-dev libesd0-dev libwxgtk2.8-dev \
-        squashfs-tools build-essential zip curl libncurses5-dev zlib1g-dev openjdk-8-jre openjdk-8-jdk pngcrush \
-        schedtool libxml2 libxml2-utils xsltproc lzop libc6-dev schedtool g++-multilib lib32z1-dev lib32ncurses5-dev \
-        gcc-multilib liblz4-* pngquant ncurses-dev texinfo gcc gperf patch libtool \
-        automake g++ gawk subversion expat libexpat1-dev python-all-dev binutils-static bc libcloog-isl-dev \
-        libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev lzma* \
-        liblzma* w3m android-tools-adb maven ncftp figlet
-        sudo install utils/repo /usr/bin/
-        sudo install utils/ccache /usr/bin/
-        ;;
-    "2")
         # Ubuntu 16.04
-        echo "Installing packages for Ubuntu 16.04"
-        sudo apt install -y software-properties-common
-        sudo apt-add-repository ppa:openjdk-r/ppa -y
-        sudo apt update -y
-        sudo apt install git-core python gnupg flex bison gperf libsdl1.2-dev libesd0-dev \
-        squashfs-tools build-essential zip curl libncurses5-dev zlib1g-dev openjdk-8-jre openjdk-8-jdk pngcrush \
-        schedtool libxml2 libxml2-utils xsltproc lzop libc6-dev schedtool g++-multilib lib32z1-dev lib32ncurses5-dev \
-        gcc-multilib liblz4-* pngquant ncurses-dev texinfo gcc gperf patch libtool \
-        automake g++ gawk subversion expat libexpat1-dev python-all-dev bc libcloog-isl-dev \
-        libcap-dev autoconf libgmp-dev build-essential gcc-multilib g++-multilib pkg-config libmpc-dev libmpfr-dev lzma* \
-        liblzma* w3m android-tools-adb maven ncftp htop -y
-        makeversion=$(make -v | head -1 | awk '{print $3}')
-        if [ ! "${makeversion}" == "3.81" ];
-        then
-        echo "Installing make 3.81 instead of ${makeversion}"
-        sudo install utils/make /usr/bin/
-        fi
-        sudo install utils/repo /usr/bin/
-        sudo install utils/ccache /usr/bin/
+        echo "Installing packages for Ubuntu 16.04 LTS"
+	sudo apt-get install -y git-core bc bison build-essential curl flex git gnupg gperf libesd0-dev liblz4-tool \
+	libncurses5-dev libsdl1.2-dev libwxgtk3.0-dev libxml2 libxml2-utils lzop maven openjdk-8-jdk pngcrush \
+	schedtool squashfs-tools xsltproc zip zlib1g-dev g++-multilib gcc-multilib lib32ncurses5-dev \
+	lib32readline6-dev lib32z1-dev libc6-dev-i386 x11proto-core-dev libx11-dev lib32z-dev ccache \
+	libgl1-mesa-dev libxml2-utils xsltproc unzip
         ;;
     *)
         # No distribution
@@ -149,14 +120,14 @@ prepare_environment()
     case $sources in
     "Y" | "y")
         echo "Choose a branch:"
-        echo "1) Nougut"
+        echo "1) 14.1"
         read -n1 branch
         echo -e "\r\n"
 
         case $branch in
             "1")
                 # Nougaut
-                branch="n"
+                branch="14.1"
                 ;;
             *)
                 # no branch
@@ -166,11 +137,11 @@ prepare_environment()
                 ;;
         esac
 
-        echo "Enter Target Directory (~/android/PureNexus):"
+        echo "Enter Target Directory (~/android/CM14.1):"
         read working_directory
 
         if [ ! -n $working_directory ]; then 
-            working_directory="$HOME/android/PureNexus"
+            working_directory="$HOME/android/CM14.1"
         fi
 
         echo "Installing to $working_directory"
@@ -187,12 +158,12 @@ prepare_environment()
         
         mkdir -p $working_directory
         cd $working_directory
-        repo init -u https://github.com/PureNexusProject/manifest.git -b $branch
+        repo init -u git://github.com/CyanogenMod/android.git -b $branch
         mkdir -p $working_directory/.repo/local_manifests
         touch $working_directory/.repo/local_manifests/roomservice.xml
         curl https://raw.githubusercontent.com/Hrubak/buildscripts/$branch/my_manifest.xml > $working_directory/.repo/local_manifests/roomservice.xml
-        repo sync -j12
-        echo "Sources synced to $working_directory. Use $working_directory autobuild.sh to start building PureNexus"        
+        repo sync -j16
+        echo "Sources synced to $working_directory. Use $working_directory autobuild.sh to start building CM14.1"        
         exit
         ;;
     "N" | "n")
@@ -211,7 +182,7 @@ echo -e "${txtylw}        |  __  |    /| | | |  _ |  / /\ \ |  <     "
 echo -e "${txtylw}        | |  | | |\ \| |_| | |_| \/ ____ \| . \    "
 echo -e "${txtylw}        |_|  |_|_| \_\ ____/|____/_/    \_\_|\_\   "
 echo -e "${txtylw} \r\n"
-echo -e "${txtgrn}    PureNexus ${Pure_VERSION} build environment setup script${txtrst}"
+echo -e "${txtgrn}    CyanogenMod ${CM_VERSION} build environment setup script${txtrst}"
 echo -e "${txtylw}"                             
 echo -e "${txtylw} \r\n"
 echo -e "${txtylw} ######################################################################"
