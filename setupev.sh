@@ -134,14 +134,18 @@ prepare_environment()
                 echo -e "\r\n ${txtrst}"
                 ;;
         esac
-
+	
         echo "Enter Target Directory (~/android/CM14.1):"
         read working_directory
-
-        if [ ! -n $working_directory ]; then
-            working_directory="$HOME/android/CM14.1"
+        if [ -z $working_directory ]; then
+            working_directory="~/android/CM14.1"
         fi
+	if [ -d $working_directory ]; then
+	echo "Good it exists, moving on"
+	fi
+	if [ ! -d $working_directory ]; them
 	mkdir -p $working_directory
+	fi
         echo "Installing to $working_directory"
         
         if [ ! -d $HOME/bin ]; then
