@@ -118,7 +118,7 @@ esac
        			echo -e "${txtred}Edit autobuild.sh and set ROOT=Path_to_your_Source"
         		echo -e "${txtred}or whatever your source dir is"
         		echo -e "\r\n ${txtrst}"
-        		echo -e "${txtgrn}Source Dir? (PureNexus):${txtrst}"
+        		echo -e "${txtgrn}Source Dir? (CM14.1):${txtrst}"
 			read ROOT
 
 			if [ "$ROOT" = "" ]; then
@@ -223,7 +223,7 @@ workingdir
 DIR=~/android/${ROOT}
 fi
 cd $DIR
-echo -e "${txtylw}Starting build script ${Pure_VERSION} ${CMD}${txtrst}"
+echo -e "${txtylw}Starting build script ${CM_VERSION} ${CMD}${txtrst}"
 if [ -z "${RELVER}" ]; then
 main
 else
