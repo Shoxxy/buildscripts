@@ -109,7 +109,6 @@ prepare_environment()
         ;;
     "N" | "n")
         # nothing to do
-        exit
         ;;
     esac
     
@@ -133,17 +132,16 @@ prepare_environment()
                 # no branch
                 echo -e "${txtred}No branch choosen. Aborting."
                 echo -e "\r\n ${txtrst}"
-                exit
                 ;;
         esac
 
         echo "Enter Target Directory (~/android/CM14.1):"
         read working_directory
 
-        if [ ! -n $working_directory ]; then 
+        if [ ! -n $working_directory ]; then
             working_directory="$HOME/android/CM14.1"
         fi
-
+	mkdir -p $working_directory
         echo "Installing to $working_directory"
         
         if [ ! -d $HOME/bin ]; then
@@ -155,7 +153,6 @@ prepare_environment()
         chmod a+x ~/bin/repo
         source ~/.profile
         
-        mkdir -p $working_directory
         cd $working_directory
         repo init -u git://github.com/CyanogenMod/android.git -b $branch
         repo selfupdate
