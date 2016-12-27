@@ -4,7 +4,7 @@ A_TOP=${PWD}
 CUR_DIR=`dirname $0`
 DATE=$(date +%D)
 MACHINE_TYPE=`uname -m`
-CM_VERSION=14.1
+CM_VERSION=13.0
 
 # Common defines (Arch-dependent)
 case `uname -s` in
@@ -119,14 +119,14 @@ prepare_environment()
     case $sources in
     "Y" | "y")
         echo "Choose a branch:"
-        echo "1) cm-14.1"
+        echo "1) cm-13.0"
         read -n1 branch
         echo -e "\r\n"
 
         case $branch in
             "1")
                 # Nougaut
-                branch="cm-14.1"
+                branch="cm-13.0"
                 ;;
             *)
                 # no branch
@@ -135,10 +135,10 @@ prepare_environment()
                 ;;
         esac
 	
-        echo "Enter Target Directory (~/android/CM14.1):"
+        echo "Enter Target Directory (~/android/cm13):"
         read working_directory
         if [ -z $working_directory ]; then
-            working_directory="~/android/CM14.1"
+            working_directory="~/android/cm13"
         fi
 	if [ -d $working_directory ]; then
 	echo "Good it exists, moving on"
